@@ -14,7 +14,40 @@ class _MyquoteState extends State<Myquote> {
     Quotes(author:'newton', text: 'the new thing  is a quote'),
     Quotes(author:'oscar-wilde',text: 'make thing bigger'),
   ];
- 
+
+  //addding a separate function to generate a card
+Widget quoteTempate(quote){
+  return Card(
+    margin: EdgeInsets.all(10.0),
+    elevation: 5.0,
+    color: Colors.red[100],
+    child:Padding(
+      padding: const EdgeInsets.fromLTRB(20.0,30.0,20.0,20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text("\"${quote.text}\"",
+            style: TextStyle(
+              fontSize:20.0,
+              color: Colors.red[800],
+              fontFamily: 'ubuntu'
+            ),
+          ),
+          SizedBox(
+          height: 10.0,
+          ),
+          Text(" - ${quote.author}", style:TextStyle(
+            fontSize:18.0,
+            fontFamily: 'ubuntu',
+            color:Colors.red[800]
+          ))
+      ],),
+    ),
+  );
+}
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +61,7 @@ class _MyquoteState extends State<Myquote> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-          children: quoteList.map((quote) {
-            return Text(
-              '${quote.text} - ${quote.author}',  //here i use the quote class property
-            style: TextStyle(
-              fontSize:20.0
-            ),
-            );
-          }).toList()
+          children: quoteList.map((quote)=>quoteTempate(quote)).toList() //passing the function
     )); 
   }
 }
