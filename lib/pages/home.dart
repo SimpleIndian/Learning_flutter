@@ -26,7 +26,16 @@ class _HomeState extends State<Home> {
                 },
                 icon: Icon(Icons.edit_location),
                 label: Text('choose your current location'),
-              )
+              ),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/load');
+                  },
+                  child: Icon(
+                    Icons.get_app,
+                    color: Colors.red,
+                    semanticLabel: 'Get DAta',
+                  ))
             ],
           ),
         ));
