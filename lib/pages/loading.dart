@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:my_new_app/services/worldTime.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -8,43 +7,24 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+ 
+  String nowTime = 'Loading....☁☁'; //add as a placeholder
 
-  void getTimeData() async {
-                       /*requesting the data*/
-                       
-                    //make the request to the server end Point
-    Response response = await get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+  void setTime() async {
+    WorldTime currentTime = WorldTime(location:'kolkata', url:'Asia/Kolkata',flag: 'get.png');
+    await currentTime.getTime();
+    print(currentTime.time); 
 
-              /* Storing and parsing data */
-
-    // Parse the data
-    Map getdata = jsonDecode(response.body);
-    //storing the needed data in separate varriable
-    String datetime = getdata['datetime'];
-    //add substring to cut the '+0'
-    String offset = getdata['utc_offset'].substring(2, 6); 
-
-               /* manipulating data*/
-
-//add substring to cut the all except 5 convert into a integer
-    int offsetHours = int.parse(offset.substring(0, 1)); 
-//add substring to cut the all except 30 and convert into a integer
-    int offsetMinute = int.parse(offset.substring(2,4)); 
-
-    //creating datetime object from the string parsing
-    DateTime now = DateTime.parse(datetime);
-
-    //adding offset hours and minutes to the datetime
-
-    now = now.add(Duration(hours: offsetHours, minutes: offsetMinute));
-
+    setState(() {
+      nowTime =currentTime.time;  //setting the real value
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    getTimeData();
-  }
+    setTime();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +32,7 @@ class _LoadingState extends State<Loading> {
         appBar: AppBar(title: Text('Loading')),
         body: SafeArea(
           child: Center(
-            child: Text('Loading..'),
+            child: Text('$nowTime'),
           ),
         ));
   }
