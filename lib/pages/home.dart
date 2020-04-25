@@ -6,8 +6,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+   Map data = {};
+
   @override
   Widget build(BuildContext context) {
+
+  data = ModalRoute.of(context).settings.arguments; //receiving the data from different route.
+   print(data);
+   
     return Scaffold(
         appBar: AppBar(title: Text('Home')),
         body: SafeArea(
@@ -16,7 +23,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Center(
                 child: Text(
-                  'main screen',
+                  '${data['time']}',
                   style: TextStyle(fontSize: 20.5, color: Colors.red),
                 ),
               ),

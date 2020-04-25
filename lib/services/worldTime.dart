@@ -40,7 +40,7 @@ class WorldTime {
 
       now = now.add(Duration(hours: offsetHours, minutes: offsetMinute));
 
-      time = '${now.toString()} 🧭'; //adding actual time to the time varriable
+      time = now.toString(); //adding actual time to the time varriable
 
     } catch (e) {
       print('this is a error $e');

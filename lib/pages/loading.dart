@@ -8,16 +8,16 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
  
-  String nowTime = 'Loading....☁☁'; //add as a placeholder
+  
 
   void setTime() async {
     WorldTime currentTime = WorldTime(location:'kolkata', url:'Asia/Kolkata',flag: 'get.png');
     await currentTime.getTime();
-    print(currentTime.time); 
-
-    setState(() {
-      nowTime =currentTime.time;  //setting the real value
-    });
+   Navigator.pushReplacementNamed(context, '/home',arguments: {
+     'location':currentTime.location,
+     'flag':currentTime.flag,
+     'time':currentTime.time
+   }); //sending data to different route using arguments.
   }
 
   @override
@@ -32,7 +32,7 @@ class _LoadingState extends State<Loading> {
         appBar: AppBar(title: Text('Loading')),
         body: SafeArea(
           child: Center(
-            child: Text('$nowTime'),
+            child: Text('loading...'),
           ),
         ));
   }
