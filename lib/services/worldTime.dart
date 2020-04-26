@@ -6,7 +6,7 @@ class WorldTime {
   String flag; //custom image
   String time; //readable time
   String url; //url to go the the timezone
-
+  bool isDay;
   WorldTime({this.location, this.flag, this.url});
 
   Future<void> getTime() async {
@@ -39,6 +39,9 @@ class WorldTime {
       //adding offset hours and minutes to the datetime
 
       now = now.add(Duration(hours: offsetHours, minutes: offsetMinute));
+
+      isDay = now.hour > 6 && now.hour < 18 ? true :false;
+
       time = DateFormat.jm().format(now); //using 'intl' class to define date
       
 

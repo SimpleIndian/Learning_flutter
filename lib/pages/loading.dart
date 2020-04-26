@@ -9,13 +9,13 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   void setTime() async {
-    WorldTime currentTime =
-        WorldTime(location: 'kolkata', url: 'Asia/Kolkata', flag: 'get.png');
+    WorldTime currentTime = WorldTime(location: 'kolkata', url: 'Asia/Kolkata', flag: 'get.png');
     await currentTime.getTime();
      Navigator.pushReplacementNamed(context, '/home',arguments: {
        'location':currentTime.location,
        'flag':currentTime.flag,
-       'time':currentTime.time
+       'time':currentTime.time,
+       'isDay': currentTime.isDay
      }); //sending data to different route using arguments.
   }
 
