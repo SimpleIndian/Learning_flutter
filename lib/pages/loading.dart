@@ -29,10 +29,15 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Loading')),
         body: SafeArea(
           child: Center(
-            child: Text('loading...'),
+            child: Text('Loading...☁☁☁',
+            style: TextStyle(
+              fontSize:25.0,
+              fontFamily:'ubuntu',
+              color:Colors.green
+            ),
+            ),
           ),
         ));
   }

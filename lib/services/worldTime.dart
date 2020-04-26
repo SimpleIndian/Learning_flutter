@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 class WorldTime {
   String location; //ui friendly location
   String flag; //custom image
@@ -39,8 +39,8 @@ class WorldTime {
       //adding offset hours and minutes to the datetime
 
       now = now.add(Duration(hours: offsetHours, minutes: offsetMinute));
-
-      time = now.toString(); //adding actual time to the time varriable
+      time = DateFormat.jm().format(now); //using 'intl' class to define date
+      
 
     } catch (e) {
       print('this is a error $e');
