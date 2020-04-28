@@ -10,10 +10,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)
-        .settings
-        .arguments; //receiving the data from different route.
-    print(data);
+    data = data.isNotEmpty ? data: ModalRoute.of(context).settings.arguments; //receiving the data from different route.
+  
     String bgimg = data['isDay']?'https://images.unsplash.com/photo-1524046346361-5a9c9592fb74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60':'https://images.unsplash.com/photo-1536746803623-cef87080bfc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60';
     Color bgCol = data['isDay']? Colors.orange[100]:Colors.black;
    
@@ -56,8 +54,17 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 20.0),
                 RaisedButton.icon(
                   elevation: 0.0,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/locate');
+                  onPressed: ()async {
+                   dynamic result = await Navigator.pushNamed(context, '/locate');
+                    setState((){
+                       data = {
+                         //here you have access to the the all the thing send by navigator
+                        'time':result['time'],
+                        'location':result['location'],
+                        'isDay':result['isDay'],
+                        'flag':result['flag'],
+                      };
+                    });
                   },
                   icon: Icon(Icons.location_city),
                   label: Text('location'),
